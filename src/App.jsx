@@ -1,11 +1,11 @@
-import { Analytics } from '@vercel/analytics/next';
-import Portfolio from './components/Portfolio';
+import Portfolio from "./components/Portfolio";
+import Analytics from "./components/Analytics";
 
 function App() {
   return (
     <>
       <Portfolio />
-      <Analytics/>
+      <Analytics />
     </>
   );
 }
