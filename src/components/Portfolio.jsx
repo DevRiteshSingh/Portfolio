@@ -123,6 +123,29 @@ export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    const existingIcon = document.querySelector('link[data-portfolio-favicon]');
+    if (!existingIcon) {
+      const icon = document.createElement("link");
+      icon.rel = "icon";
+      icon.type = "image/svg+xml";
+      icon.href = `data:image/svg+xml,${encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <rect width="64" height="64" rx="16" fill="#16152a"/>
+          <text x="32" y="39"
+            text-anchor="middle"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="24"
+            font-weight="700"
+            letter-spacing="-2"
+            fill="#ffffff">RS</text>
+        </svg>
+      `)}`;
+      icon.setAttribute("data-portfolio-favicon", "true");
+      document.head.appendChild(icon);
+    }
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 820) setMobileMenuOpen(false);
     };
