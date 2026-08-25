@@ -122,6 +122,15 @@ export default function Portfolio() {
   const [theme, setTheme] = useState(getSavedTheme);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const navigateToSection = (id) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    setMobileMenuOpen(false);
+  };
+
   useEffect(() => {
     const existingIcon = document.querySelector('link[data-portfolio-favicon]');
     if (!existingIcon) {
@@ -293,14 +302,14 @@ export default function Portfolio() {
       <div className="scroll-progress" aria-hidden="true"><span className="scroll-progress-value" /></div>
       <nav className="navbar">
         <div className="nav-content">
-          <a href="#home" className="brand" aria-label="Ritesh Singh home">
+          <button type="button" className="brand brand-button" onClick={() => navigateToSection("home")} aria-label="Ritesh Singh home">
             <span className="brand-mark">RS</span>
             <span>Ritesh Singh</span>
-          </a>
+          </button>
           <div className="nav-links">
-            <a href="#work">Selected work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <button type="button" onClick={() => navigateToSection("work")}>Selected work</button>
+            <button type="button" onClick={() => navigateToSection("about")}>About</button>
+            <button type="button" onClick={() => navigateToSection("contact")}>Contact</button>
           </div>
           <div className="nav-actions">
             <div className="theme-switch" role="group" aria-label="Choose color theme">
@@ -336,9 +345,9 @@ export default function Portfolio() {
         </div>
 
         <div id="mobile-navigation" className={`mobile-navigation ${mobileMenuOpen ? "is-open" : ""}`}>
-          <a href="#work" onClick={() => setMobileMenuOpen(false)}>Selected work</a>
-          <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
-          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          <button type="button" onClick={() => navigateToSection("work")}>Selected work</button>
+          <button type="button" onClick={() => navigateToSection("about")}>About</button>
+          <button type="button" onClick={() => navigateToSection("contact")}>Contact</button>
           <a href="mailto:ritesh0505singh@gmail.com" onClick={() => setMobileMenuOpen(false)}>
             Let&apos;s talk <ArrowUpRight size={15} />
           </a>
@@ -356,7 +365,7 @@ export default function Portfolio() {
             <div className="hero-bottom">
               <p className="hero-copy">I&apos;m Ritesh — a full-stack developer shaping fast, human-centered web products and practical AI experiences.</p>
               <div className="hero-actions">
-                <a className="button button-primary" href="#work">Explore my work <ArrowDownRight size={17} /></a>
+                <button type="button" className="button button-primary" onClick={() => navigateToSection("work")}>Explore my work <ArrowDownRight size={17} /></button>
                 <a className="button button-ghost" href="mailto:ritesh0505singh@gmail.com">Email me <Mail size={16} /></a>
               </div>
             </div>
@@ -371,7 +380,7 @@ export default function Portfolio() {
             </div>
             <p className="hero-note"><span>Based in Delhi, India</span><span>·</span><span>Building worldwide</span></p>
           </aside>
-          <a href="#work" className="scroll-cue"><span /> Scroll to explore</a>
+          <button type="button" className="scroll-cue" onClick={() => navigateToSection("work")}><span /> Scroll to explore</button>
         </section>
 
         <section className="capabilities" id="about" aria-label="Capabilities">

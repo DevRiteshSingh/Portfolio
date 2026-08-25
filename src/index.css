@@ -2101,3 +2101,57 @@ a {
         font-size: 23px;
     }
 }
+
+
+/* Internal navigation uses buttons + history API, so section IDs never appear in the URL. */
+.brand-button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+}
+
+.nav-links button,
+.mobile-navigation button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+}
+
+.nav-links button {
+    transition: color .2s ease;
+}
+
+.nav-links button:hover {
+    color: var(--violet);
+}
+
+.mobile-navigation button {
+    min-height: 48px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 11px;
+    color: var(--nav-muted);
+    font-size: 15px;
+}
+
+.mobile-navigation button:hover,
+.mobile-navigation button:active {
+    background: var(--card);
+    color: var(--ink);
+}
+
+.scroll-cue {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font: 10px "DM Mono", monospace;
+}
