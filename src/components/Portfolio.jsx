@@ -6,6 +6,8 @@ import {
   Code2,
   ExternalLink,
   Mail,
+  Menu,
+  X,
   Monitor,
   Moon,
   Search,
@@ -118,6 +120,21 @@ function ProjectVisual({ project }) {
 export default function Portfolio() {
   const container = useRef(null);
   const [theme, setTheme] = useState(getSavedTheme);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 820) setMobileMenuOpen(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", mobileMenuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const colorPreference = window.matchMedia("(prefers-color-scheme: dark)");
@@ -282,7 +299,26 @@ export default function Portfolio() {
             <a href="mailto:ritesh0505singh@gmail.com" className="nav-cta">
               Let&apos;s talk <ArrowUpRight size={15} />
             </a>
+            <button
+              type="button"
+              className="mobile-menu-toggle"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
+        </div>
+
+        <div id="mobile-navigation" className={`mobile-navigation ${mobileMenuOpen ? "is-open" : ""}`}>
+          <a href="#work" onClick={() => setMobileMenuOpen(false)}>Selected work</a>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          <a href="mailto:ritesh0505singh@gmail.com" onClick={() => setMobileMenuOpen(false)}>
+            Let&apos;s talk <ArrowUpRight size={15} />
+          </a>
         </div>
       </nav>
 
